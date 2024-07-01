@@ -7,14 +7,15 @@ import { LuSendHorizonal } from "react-icons/lu"
 interface ModalProps {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsFocused: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, setIsFocused, setIsOpen }) => {
   const [isGenerated, setIsGenerated] = useState(false)
   const [userInput, setUserInput] = useState("")
   const [regenerateInput, setRegenerateInput] = useState("")
 
-  const DUMMY_RESPONSE = `Thank you for the opportunity! If you have any more questions or if there's anythin else I can help you with, feel free to ask`
+  const DUMMY_RESPONSE = `Thank you for the opportunity! If you have any more questions or if there's anything else I can help you with, feel free to ask`
 
   function closeModal() {
     setIsOpen(false)
@@ -31,9 +32,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
       ".msg-form__contenteditable"
     ) as HTMLTextAreaElement
 
-    textarea.children[0].innerHTML = DUMMY_RESPONSE
+    // textarea.setAttribute("aria-label","")
+    const removePlaceHolderDiv = document.querySelector('.msg-form__placeholder') as HTMLDivElement;
+
+    removePlaceHolderDiv.classList.remove('msg-form__placeholder')
+    const writableArea = textarea.children[0] as HTMLParagraphElement;
+    writableArea.innerText = DUMMY_RESPONSE
     setIsGenerated(false)
     setUserInput("")
+    // setIsFocused(true)
   }
 
   return (

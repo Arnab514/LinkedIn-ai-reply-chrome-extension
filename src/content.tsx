@@ -47,7 +47,7 @@ const PlasmoOverlay = () => {
           onClick={() => setIsOpen(true)}
           className="text-xl text-blue-600 shadow-sm"
         />
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Modal isOpen={isOpen} setIsFocused={setIsFocused} setIsOpen={setIsOpen} />
       </div>
     );
   } else {
